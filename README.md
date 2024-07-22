@@ -1,7 +1,7 @@
 ## REPOSITORY FOR MULTIBEAM ARC AND PRESSURE DATA ANALYSIS
 
 #### File Descriptions
-- ```mebl3_data_preprocess.ipynb``` makes the original dataframes tidy (original and cleaned dataframes are in ```data/MEBL3```)
+- ```mebl3_data_preprocess.ipynb``` makes the original dataframes tidy (original and cleaned dataframes are in ```data/MEBL3```, which only exists locally)
 - ```pressure_spikes.ipynb``` identifies timestamps of spikes in the Column Pressure and Chamber Pressure measurements of MEBL3
     * Timestamp values are saved as JSON dictionaries in ```data/pressure_spike_times```
 - ```arc_at_pressure_spikes.ipynb``` takes the timestamps of ```data/pressure_spike_times``` and identifies arc events that are synchronous with these pressure spikes
