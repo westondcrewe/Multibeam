@@ -7,9 +7,9 @@ import argparse
 import os
 import errno
 ### HELPER FUNCTIONS ####
-def arc_tidy(filename):
-    arc_count_df = pd.read_csv(filename, parse_dates=['Time']).fillna(0)
-    print(f"{filename} : file read into a pandas dataframe.")
+def arc_tidy(file_path):
+    arc_count_df = pd.read_csv(file_path, parse_dates=['Time']).fillna(0)
+    print(f"{file_path} : file read into a pandas dataframe.")
     # DROP PRESSURE COLUMNS (STORED SEPARATELY)
     arc_count_df = arc_count_df.drop(arc_count_df.columns[1:3], axis=1)
     # USE REGEX TO REPLACE QUERY FORMATTED VARIABLE NAMES WITH SYSTEM COLUMN AND COLUMN COMPONENT
@@ -29,21 +29,21 @@ def arc_tidy(filename):
     arc_count_df['Time'] = pd.to_datetime(arc_count_df['Time'])
     # WRTIE PREPROCESSED ARC COUNT DATAFRAME TO CSV
     arc_count_df.to_csv('data/tidy/all_arc_count_data', index = False)
-def pressure_tidy(filename):
+def pressure_tidy(file_path):
     # READ-IN PRESSURE DATA DATAFRAME
-    pressure_df = pd.read_csv(filename).fillna(0)
-    print(f"{filename} : file read into a pandas dataframe.")
+    pressure_df = pd.read_csv(file_path).fillna(0)
+    print(f"{file_path} : file read into a pandas dataframe.")
     # CONVERT "Time" VARIABLE FROM STRING TO DATETIME OBJECT
     pressure_df['Time'] = pd.to_datetime(pressure_df['Time'])
     pressure_df.to_csv('data/tidy/pressure_data', index = False)
 ### MAIN FUNCTION ###
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--arc_filename',required=True)
-    parser.add_argument('--pressure_filename',required=True)
+    parser.add_argument('--arc_file_path',required=True)
+    parser.add_argument('--pressure_file_path',required=True)
     args = parser.parse_args()
-    arc_filename = args.arc_filename
-    pressure_filename = args.pressure_filename
+    arc_file_path = args.arc_file_path
+    pressure_file_path = args.pressure_file_path
     output_dir = "data/tidy/"
     try:
         os.makedirs(output_dir, exist_ok=True)
@@ -60,5 +60,5 @@ if __name__ == '__main__':
                 print(f"Failed to change permissions or create directory: {e}")
         else:
             raise
-    arc_tidy(arc_filename)
-    pressure_tidy(pressure_filename)
+    arc_tidy(arc_file_path)
+    pressure_tidy(pressure_file_path)
