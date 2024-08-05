@@ -12,6 +12,7 @@ from collections import deque
 import argparse
 import os
 import errno
+import pressure_window_plot as pwp
 ### HELPER FUNCTIONS ###
 def read_arc_data(arc_filename):
     # READ-IN CLEAN ARC COUNTS DATAFRAME
@@ -20,6 +21,10 @@ def read_arc_data(arc_filename):
     # CONVERT TO NUMPY ARRAY
     arc_count_arr = arc_count_df.to_numpy()
     return arc_count_arr, arc_count_df.columns[1:]
+def read_pressure_data(pressure_filename):
+    pressure_df = pd.read_csv(pressure_filename, parse_dates=['Time'])    
+    print(f"{pressure_filename} : file read into a pandas dataframe.")
+    return pressure_df
 def read_pressure_spike_data(chamber_json, column_json):
     chamber_json = open(chamber_json)
     chamber_spikes = json.load(chamber_json)
@@ -90,7 +95,7 @@ def plot_counts(arc_pressure_df):
     plot.set_title(title)
     output_dir = "plots/arcs_with_pressure_spikes/"
     make_plot_directory(output_dir)
-    print("Saving counts plot...")
+    print(f"Saving counts plot to {output_dir}")
     plt.savefig(f"{output_dir}{title.replace(" ", "_")}.pdf", format = 'pdf')
 def plot_percents(arc_pressure_df):
     percents_plot_df = arc_pressure_df[["Column HVPS", "Percent of Arcs Synchronous w/ Pressure Spikes"]].sort_values(by="Percent of Arcs Synchronous w/ Pressure Spikes", ascending=False)
@@ -101,7 +106,7 @@ def plot_percents(arc_pressure_df):
     plot.set_title(title)
     output_dir = "plots/arcs_with_pressure_spikes/"
     make_plot_directory(output_dir)
-    print("Saving percents plot...")
+    print(f"Saving counts plot to {output_dir}")
     plt.savefig(f"{output_dir}{title.replace(" ", "_")}.pdf", format = 'pdf')
 def plot_total_counts(arc_pressure_df):
     total_counts_plot_df = arc_pressure_df[["Column HVPS", "Total Arc Counts"]].sort_values(by="Total Arc Counts", ascending=False)
@@ -112,18 +117,20 @@ def plot_total_counts(arc_pressure_df):
     plot.set_title(title)
     output_dir = "plots/arcs_with_pressure_spikes/"
     make_plot_directory(output_dir)
-    print("Saving total arc counts plot...")
+    print(f"Saving counts plot to {output_dir}")
     plt.savefig(f"{output_dir}{title.replace(" ", "_")}.pdf", format = 'pdf')
 
 ### MAIN FUNCTION ###
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--arc_filename',required=True)
+    parser.add_argument('--pressure_filename', required=True)
     parser.add_argument('--chamber_json', required=True)
     parser.add_argument('--column_json', required=True)
     args = parser.parse_args()
 
     arc_filename = args.arc_filename
+    pressure_filename = args.pressure_filename
     chamber_json = args.chamber_json
     column_json = args.column_json
 
@@ -133,9 +140,15 @@ if __name__ == '__main__':
     arc_pressure_counts = get_arcs_at_pressure_spikes_counts(arcs_at_pressure_spikes)
     total_arc_counts = get_total_arc_counts(arc_count_arr)
     arc_pressure_percent = get_arcs_at_pressure_spikes_percents(arc_pressure_counts, total_arc_counts)
-
     arc_pressure_df = create_dataframe(column_HVPS, total_arc_counts, arc_pressure_counts, arc_pressure_percent)
-
     plot_counts(arc_pressure_df)
     plot_percents(arc_pressure_df)
     plot_total_counts(arc_pressure_df)
+
+    pressure_df = read_pressure_data(pressure_filename)
+    for time in chamber_spikes:
+        pwp.pressure_window(time, pressure_df, 'Chamber Pressure', 10)
+    print(f"Saving chamber pressure spike plots to plots/pressure_spikes")
+    for time in column_spikes:
+        pwp.pressure_window(time, pressure_df, 'Column Pressure', 10)
+    print(f"Saving column pressure spike plots to plots/pressure_spikes")
