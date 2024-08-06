@@ -21,10 +21,9 @@
 
 2. The two downloaded dataframes are passed into the file `mebl_data_preprocess.py`, which cleans the data and passes the tidy files to the `data/tidy/` subfolder. This becomes the new data source for the rest of the programs to run. 
     - Terminal command to run `mebl_data_preprocess.py` (current directory is repository’s root, all programs and scripts are in the folder `python_files/`):
-```
-python3 python_files/mebl_data_preprocess.py --arc_filename data/MEBL/MEBL3_All\ Arc\ Counts-data-as-joinbyfield-2024-07-01\ 10_16_54.csv --pressure_filename data/MEBL/MEBL3_Pressure-data-2024-06-28\ 09_40_08.csv
-``` 
-
+    ```
+    python3 python_files/mebl_data_preprocess.py --arc_filename data/MEBL/MEBL3_All\ Arc\ Counts-data-as-joinbyfield-2024-07-01\ 10_16_54.csv --pressure_filename data/MEBL/MEBL3_Pressure-data-2024-06-28\ 09_40_08.csv
+    ``` 
     - Note: 
         - `–arc_filename`, `–pressure_filename` arguments are required, and should be the relative paths to the downloaded MB csv files. 
         - If filenames include whitespace, put an escape character (\) before the whitespace.
@@ -34,9 +33,9 @@ python3 python_files/mebl_data_preprocess.py --arc_filename data/MEBL/MEBL3_All\
     - Pressure spikes are defined as observations in the pressure dataset for which the pressure value exceeds 2x the “local pressure mean”. This mean is calculated from the pressure values of the 10 preceding seconds to the spike time.
 
     - Terminal Terminal command to run: 
-```
-python3 python_files/pressure_spike_times.py --pressure_filename data/tidy/pressure_data --time_range 5
-```
+    ```
+    python3 python_files/pressure_spike_times.py --pressure_filename data/tidy/pressure_data --time_range 5
+    ```
     - Note: 
         - `–pressure_filename` argument is required 
         - `–time_range` argument is optional. 
