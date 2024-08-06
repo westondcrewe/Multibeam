@@ -32,10 +32,7 @@
 
     - Pressure spikes are defined as observations in the pressure dataset for which the pressure value exceeds 2x the “local pressure mean”. This mean is calculated from the pressure values of the 10 preceding seconds to the spike time.
 
-    - Command to run: 
-
-```python3 python_files/pressure_spike_times.py --pressure_filename data/tidy/pressure_data --time_range 5```
-
+    - Command to run: ```python3 python_files/pressure_spike_times.py --pressure_filename data/tidy/pressure_data --time_range 5```
     - Note: 
         - `–pressure_filename` argument is required 
         - `–time_range` argument is optional. 
