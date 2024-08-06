@@ -20,7 +20,7 @@
 1. Database is accessed via Grafana; `all arc counts` and `pressure` data is downloaded to the repository’s `data/MEBL/` subfolder.
 
 2. The two downloaded dataframes are passed into the file `mebl_data_preprocess.py`, which cleans the data and passes the tidy files to the `data/tidy/` subfolder. This becomes the new data source for the rest of the programs to run. 
-    - Command to run `mebl_data_preprocess.py` (current directory is repository’s root, all programs and scripts are in the folder `python_files/`):
+    - Terminal command to run `mebl_data_preprocess.py` (current directory is repository’s root, all programs and scripts are in the folder `python_files/`):
 ```
 python3 python_files/mebl_data_preprocess.py --arc_filename data/MEBL/MEBL3_All\ Arc\ Counts-data-as-joinbyfield-2024-07-01\ 10_16_54.csv --pressure_filename data/MEBL/MEBL3_Pressure-data-2024-06-28\ 09_40_08.csv
 ``` 
@@ -33,7 +33,7 @@ python3 python_files/mebl_data_preprocess.py --arc_filename data/MEBL/MEBL3_All\
 
     - Pressure spikes are defined as observations in the pressure dataset for which the pressure value exceeds 2x the “local pressure mean”. This mean is calculated from the pressure values of the 10 preceding seconds to the spike time.
 
-    - Command to run: 
+    - Terminal Terminal command to run: 
 ```
 python3 python_files/pressure_spike_times.py --pressure_filename data/tidy/pressure_data --time_range 5
 ```
@@ -58,7 +58,7 @@ python3 python_files/pressure_spike_times.py --pressure_filename data/tidy/press
   - Arcs are considered synchronous if an arc event occurs at the same time for two different system components. 
   - Heatmaps of these synchronous arcs are made for each component, as well as one heatmap displaying the entire synchronous arc dataframe (63 components x 63 components heatmap).
 
-**Command to run:**
+**Terminal Terminal command to run:**
 
 Note:
 
@@ -74,7 +74,7 @@ Note:
   - Pressure deltas are calculated as the difference between the pressure maximum and pressure mean (as described in 6.b.i). 
   - Histograms are created for both chamber and column pressure types, and the corresponding data is saved to `data/pressure_deltas_at_arcs.csv`.
 
-**Command to run:**
+**Terminal Terminal command to run:**
 
 Note:
 
@@ -88,7 +88,7 @@ Note:
 - `plots/arcs_at_pressure_spikes/`: A folder containing barcharts of the counts and percentages of arcs that occurred at the same time as a pressure spike for every system power supply component. 
   - The corresponding dataframe is saved to `data/arcs_at_pressure_spikes.csv`.
 
-**Command to run:**
+**Terminal Terminal command to run:**
 
 ```python3 python_files/arcs_at_pressure_spikes.py --arc_filename data/tidy/all_arc_count_data --pressure_filename data/tidy/pressure_data --chamber_json pressure_spike_times/chamber_spike_times_5_sec.json --column_json pressure_spike_times/column_spike_times_5_sec.json```
 
