@@ -17,37 +17,37 @@
 ### Flowchart and Manual
 ![Project Flowchart](WCMultibeamProjectFlowchart.png)
 
-Database is accessed via Grafana; `all arc counts` and `pressure` data is downloaded to the repository’s `data/MEBL/` subfolder.
+1. Database is accessed via Grafana; `all arc counts` and `pressure` data is downloaded to the repository’s `data/MEBL/` subfolder.
 
-The two downloaded dataframes are passed into the file `mebl_data_preprocess.py`, which cleans the data and passes the tidy files to the `data/tidy/` subfolder. This becomes the new data source for the rest of the programs to run. 
-Command to run `mebl_data_preprocess.py` (current directory is repository’s root, all programs and scripts are in the folder `python_files/`):
+2. The two downloaded dataframes are passed into the file `mebl_data_preprocess.py`, which cleans the data and passes the tidy files to the `data/tidy/` subfolder. This becomes the new data source for the rest of the programs to run. 
+- Command to run `mebl_data_preprocess.py` (current directory is repository’s root, all programs and scripts are in the folder `python_files/`):
 
 ```python3 python_files/mebl_data_preprocess.py --arc_filename data/MEBL/MEBL3_All\ Arc\ Counts-data-as-joinbyfield-2024-07-01\ 10_16_54.csv --pressure_filename data/MEBL/MEBL3_Pressure-data-2024-06-28\ 09_40_08.csv``` 
 
-Note: 
-- `–arc_filename`, `–pressure_filename` arguments are required, and should be the relative paths to the downloaded MB csv files. 
-- If filenames include whitespace, put an escape character (\) before the whitespace.
+- Note: 
+  - `–arc_filename`, `–pressure_filename` arguments are required, and should be the relative paths to the downloaded MB csv files. 
+  - If filenames include whitespace, put an escape character (\) before the whitespace.
 
-The tidy `pressure_data` file is used as input to the `pressure_spike_times.py` file, which identifies and stores the timestamps of all system vacuum pressure spikes.
+- The tidy `pressure_data` file is used as input to the `pressure_spike_times.py` file, which identifies and stores the timestamps of all system vacuum pressure spikes.
 
-Pressure spikes are defined as observations in the pressure dataset for which the pressure value exceeds 2x the “local pressure mean”. This mean is calculated from the pressure values of the 10 preceding seconds to the spike time.
+- Pressure spikes are defined as observations in the pressure dataset for which the pressure value exceeds 2x the “local pressure mean”. This mean is calculated from the pressure values of the 10 preceding seconds to the spike time.
 
-Command to run: 
+- Command to run: 
 
 ```python3 python_files/pressure_spike_times.py --pressure_filename data/tidy/pressure_data --time_range 5```
 
-Note: 
-- `–pressure_filename` argument is required, 
-- `–time_range` argument is optional. 
-  - `pressure_filename` is the path to the clean pressure_data file, and 
+- Note: 
+  - `–pressure_filename` argument is required 
+  - `–time_range` argument is optional. 
+  - `pressure_filename` is the path to the clean pressure_data file 
   - `time_range` is the number of seconds for which a local mean pressure value is calculated, a factor in the identification of the spike threshold (default=5).
 
-Pressure spike timestamps are separated by pressure type and time_range (this information is kept in filenames) and saved as JSON files to the `pressure_spike_times/` folder.
+- Pressure spike timestamps are separated by pressure type and time_range (this information is kept in filenames) and saved as JSON files to the `pressure_spike_times/` folder.
 
-Once pressure_spikes have been saved, any of the 3 features may be utilized:
-1. `synchronous_arc_clusters.py`
-2. `pressure_at_arcs.py`
-3. `arcs_at_pressure_spikes.py` and `window_pressure.py`
+3. Once pressure_spikes have been saved, any of the 3 features may be utilized:
+  1. `synchronous_arc_clusters.py`
+  2. `pressure_at_arcs.py`
+  3. `arcs_at_pressure_spikes.py` and `window_pressure.py`
 
 #### synchronous_arc_clusters.py:
 **Inputs:**
