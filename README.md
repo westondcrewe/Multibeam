@@ -1,7 +1,7 @@
 ## REPOSITORY FOR MULTIBEAM ARC AND PRESSURE DATA ANALYSIS
 
 ### <ins>Cloning GitHub Remote Repository Onto Local Machine and Running from Terminal</ins>
-1. Open the `Multibeam` repository (main branch) on GitHub website
+1. Make sure you are on the `main` branch of the `Multibeam` GitHub remote repository
 2. Click the green dropdown menu labelled "< > Code"; select "Download ZIP" and unzip the downloaded file
 3. Open the terminal/command line on your local machine; Use the `cd` command to navigate to the repository's root directory, ```Multibeam-main/```
 4. Run the following command to ensure all necessary libraries and packages are installed (at most 5 packages will be installed):
