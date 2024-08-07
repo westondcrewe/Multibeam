@@ -4,6 +4,11 @@ cd ..
 chmod 777 Multibeam-main/
 cd Multibeam-main
 
+rm -rf plots/*
+rm -rf data/*
+mkdir data/MEBL
+rm -rf pressure_spike_times/
+
 echo
 echo "Cleaning Data..."
 python3 python_files/mebl_data_preprocess.py --arc_filename data/MEBL/*Arc* --pressure_filename data/MEBL/*Pressure*
