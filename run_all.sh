@@ -6,7 +6,7 @@ cd Multibeam-main
 
 rm -rf plots/*
 rm -rf data/tidy
-find /direcname -maxdepth 1 -type f -delete
+find data/ -maxdepth 1 -type f -exec rm {} +
 rm -rf pressure_spike_times/
 
 echo
