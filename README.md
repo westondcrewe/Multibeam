@@ -2,9 +2,7 @@
 
 ### <ins>Flowchart and Manual</ins>
 ![Project Flowchart](WCMultibeamProjectFlowchart.png)
-
 1. Database is accessed via Grafana; `all arc counts` and `pressure` data is downloaded to the repository’s `data/MEBL/` subfolder.
-
 2. The two downloaded dataframes are passed into the file `mebl_data_preprocess.py`, which cleans the data and passes the tidy files to the `data/tidy/` subfolder. This becomes the new data source for the rest of the programs to run. 
     - Terminal command to run `mebl_data_preprocess.py` (current directory is repository’s root, all programs and scripts are in the folder `python_files/`):
     ```
@@ -30,21 +28,16 @@
 #### <ins>synchronous_arc_clusters.py</ins>
 **Inputs:**
 - Only the clean `all_arc_data` file is passed as an input
-
 **Outputs:**
 - `plots/arc_clusters`
-    - A folder containing heatmaps displaying synchronous arc counts and percentages. 
-    - Arcs are considered synchronous if an arc event occurs at the same time for two different system components. 
-    - Heatmaps of these synchronous arcs are made for each component, as well as one heatmap displaying the entire synchronous arc dataframe (63 components x 63 components heatmap).
-
+    - A folder containing heatmaps displaying synchronous arc counts and percentages
+    - Arcs are considered synchronous if an arc event occurs at the same time for two different system components 
+    - Heatmaps of these synchronous arcs are made for each component, as well as one heatmap displaying the entire synchronous arc dataframe (63 components x 63 components heatmap)
 **Terminal Terminal command to run:**
-
 <ins>Note</ins>:
-
 #### pressure_at_arcs.py:
 **Inputs:**
-- Scripts take both clean data files from `data/tidy/`.
-
+- Scripts take both clean data files from `data/tidy/`
 **Outputs:**
 - `plots/pressure_at_arcs/`
     - A folder containing time-series line graphs of the system’s chamber and column pressure values over 30 second windows surrounding each arc event
@@ -54,15 +47,11 @@
     - A folder containing histograms displaying the distribution of “pressure delta” values across all arc events
     - Pressure deltas are calculated as the difference between the pressure maximum and pressure mean (as described in 6.b.i)
     - Histograms are created for both chamber and column pressure types, and the corresponding data is saved to `data/pressure_deltas_at_arcs.csv`
-
 **Terminal Terminal command to run:**
-
 <ins>Note</ins>:
-
 #### arcs_at_pressure_spikes.py and window_pressure.py:
 **Inputs:**
-- Both clean dataframes from `data/tidy/` and both json files in `pressure_spike_times/` are used as input.
-
+- Both clean dataframes from `data/tidy/` and both json files in `pressure_spike_times/` are used as input
 **Outputs:**
 - `plots/Total_Arc_Counts.pdf`
     - A barchart showing how many total arcs there are for each system power supply component
@@ -71,14 +60,10 @@
 - `plots/arcs_at_pressure_spikes/`
     - A folder containing barcharts of the counts and percentages of arcs that occurred at the same time as a pressure spike for every system power supply component 
     - The corresponding dataframe is saved to `data/arcs_at_pressure_spikes.csv`
-
 **Terminal Terminal command to run:**
-
 ```python3 python_files/arcs_at_pressure_spikes.py --arc_filename data/tidy/all_arc_count_data --pressure_filename data/tidy/pressure_data --chamber_json pressure_spike_times/chamber_spike_times_5_sec.json --column_json pressure_spike_times/column_spike_times_5_sec.json```
-
 <ins>Note</ins>: 
 - `–arc_filename`, `–pressure_filename`, `–chamber_json`, `–column_json` are all required, must be relative paths to each respective data file.
-
 The `window_pressure.py` file is inherited by the `arcs_at_pressure_spikes.py` file, so no commands need to be run for that script specifically.
 
 ### File Descriptions
