@@ -10,7 +10,7 @@
     ``` 
     - Note: 
         - `–arc_filename`, `–pressure_filename` arguments are required, and should be the relative paths to the downloaded MB csv files 
-        - If filenames include whitespace, put an escape character (\) before the whitespace
+        - If filenames include whitespace, put an escape character (\ ) before the whitespace
 3. The tidy `pressure_data` file is used as input to the `pressure_spike_times.py` file, which identifies and stores the timestamps of all system vacuum pressure spikes.
     - Pressure spikes are defined as observations in the pressure dataset for which the pressure value exceeds 2x the “local pressure mean”. This mean is calculated from the pressure values of the 10 preceding seconds to the spike time
     - Terminal command to run: 
