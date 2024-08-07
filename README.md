@@ -1,5 +1,17 @@
 ## REPOSITORY FOR MULTIBEAM ARC AND PRESSURE DATA ANALYSIS
-
+### <ins>Cloning GitHub Remote Repository Onto Local Machine and Running from Terminal</ins>
+1. Open the `Multibeam` repository (main branch) on GitHub website
+2. Click the green dropdown menu labelled "< > Code"; select "Download ZIP" and unzip the downloaded file
+3. Open the terminal/command line on your local machine; Use the `cd` command to navigate to the repository's root directory, ```Multibeam-main/```
+4. Run the following command to ensure all necessary libraries and packages are installed (at most 5 packages will be installed):
+```
+sh library_package_installs.sh
+```
+5. To run individual features within the project repository, follow along with the provided **Flowchart and Manual**
+5. Alternatively, to run the entire project in one go, use the following command to run the ```run_all.sh``` script:
+```
+sh run_all.sh
+```
 ### <ins>Flowchart and Manual</ins>
 ![Project Flowchart](WCMultibeamProjectFlowchart.png)
 1. Database is accessed via Grafana; `all arc counts` and `pressure` data is downloaded to the repository’s `data/MEBL/` subfolder.
