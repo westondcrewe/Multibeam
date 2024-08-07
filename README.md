@@ -32,9 +32,10 @@
 - Only the clean `all_arc_data` file is passed as an input
 
 **Outputs:**
-- `plots/arc_clusters`: A folder containing heatmaps displaying synchronous arc counts and percentages. 
-  - Arcs are considered synchronous if an arc event occurs at the same time for two different system components. 
-  - Heatmaps of these synchronous arcs are made for each component, as well as one heatmap displaying the entire synchronous arc dataframe (63 components x 63 components heatmap).
+- `plots/arc_clusters`
+    - A folder containing heatmaps displaying synchronous arc counts and percentages. 
+    - Arcs are considered synchronous if an arc event occurs at the same time for two different system components. 
+    - Heatmaps of these synchronous arcs are made for each component, as well as one heatmap displaying the entire synchronous arc dataframe (63 components x 63 components heatmap).
 
 **Terminal Terminal command to run:**
 
@@ -45,12 +46,14 @@
 - Scripts take both clean data files from `data/tidy/`.
 
 **Outputs:**
-- `plots/pressure_at_arcs/`: A folder containing time-series line graphs of the system’s chamber and column pressure values over 30 second windows surrounding each arc event. 
-  - The folder is made up of one subfolder for every system power supply component, and each of those folders contains one plot for every arc event that happened within that component. 
-  - Plots also display pressure maximums (within +/- 5 seconds to the arc events), and pressure means for the 10 seconds preceding the maximum.
-- `plots/pressure_delta_histograms/`: A folder containing histograms displaying the distribution of “pressure delta” values across all arc events. 
-  - Pressure deltas are calculated as the difference between the pressure maximum and pressure mean (as described in 6.b.i). 
-  - Histograms are created for both chamber and column pressure types, and the corresponding data is saved to `data/pressure_deltas_at_arcs.csv`.
+- `plots/pressure_at_arcs/`
+    - A folder containing time-series line graphs of the system’s chamber and column pressure values over 30 second windows surrounding each arc event
+    - The folder is made up of one subfolder for every system power supply component, and each of those folders contains one plot for every arc event that happened within that component
+    - Plots also display pressure maximums (within +/- 5 seconds to the arc events), and pressure means for the 10 seconds preceding the maximum
+- `plots/pressure_delta_histograms/`
+    - A folder containing histograms displaying the distribution of “pressure delta” values across all arc events
+    - Pressure deltas are calculated as the difference between the pressure maximum and pressure mean (as described in 6.b.i)
+    - Histograms are created for both chamber and column pressure types, and the corresponding data is saved to `data/pressure_deltas_at_arcs.csv`
 
 **Terminal Terminal command to run:**
 
@@ -61,10 +64,13 @@
 - Both clean dataframes from `data/tidy/` and both json files in `pressure_spike_times/` are used as input.
 
 **Outputs:**
-- `plots/Total_Arc_Counts.pdf`: A barchart showing how many total arcs there are for each system power supply component.
-- `plots/pressure_spikes/`: A folder that contains time-series line-graph plots displaying the vacuum pressure values over a 20s range surrounding every spike event.
-- `plots/arcs_at_pressure_spikes/`: A folder containing barcharts of the counts and percentages of arcs that occurred at the same time as a pressure spike for every system power supply component. 
-  - The corresponding dataframe is saved to `data/arcs_at_pressure_spikes.csv`.
+- `plots/Total_Arc_Counts.pdf`
+    - A barchart showing how many total arcs there are for each system power supply component
+- `plots/pressure_spikes/`
+    - A folder that contains time-series line-graph plots displaying the vacuum pressure values over a 20s range surrounding every spike event
+- `plots/arcs_at_pressure_spikes/`
+    - A folder containing barcharts of the counts and percentages of arcs that occurred at the same time as a pressure spike for every system power supply component 
+    - The corresponding dataframe is saved to `data/arcs_at_pressure_spikes.csv`
 
 **Terminal Terminal command to run:**
 
