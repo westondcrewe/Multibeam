@@ -9,7 +9,7 @@
     python3 python_files/mebl_data_preprocess.py --arc_filename data/MEBL/MEBL3_All\ Arc\ Counts-data-as-joinbyfield-2024-07-01\ 10_16_54.csv --pressure_filename data/MEBL/MEBL3_Pressure-data-2024-06-28\ 09_40_08.csv
     ``` 
     - Note: 
-        - `–arc_filename`, `–pressure_filename` arguments are required, and should be the relative paths to the downloaded MB csv files 
+        - `–-arc_filename`, `–-pressure_filename` arguments are required, and should be the relative paths to the downloaded MB csv files 
         - If filenames include whitespace, put an escape character (\ ) before the whitespace
 3. The tidy `pressure_data` file is used as input to the `pressure_spike_times.py` file, which identifies and stores the timestamps of all system vacuum pressure spikes.
     - Pressure spikes are defined as observations in the pressure dataset for which the pressure value exceeds 2x the “local pressure mean”. This mean is calculated from the pressure values of the 10 preceding seconds to the spike time
@@ -18,8 +18,8 @@
     python3 python_files/pressure_spike_times.py --pressure_filename data/tidy/pressure_data --time_range 5
     ```
     - Note: 
-        - `–pressure_filename` argument is required; it is the path to the clean pressure_data file 
-        - `–time_range` argument is optional; it is the number of seconds for which a local mean pressure value is calculated, a factor in the identification of the spike threshold (default=5)
+        - `–-pressure_filename` argument is required; it is the path to the clean pressure_data file 
+        - `–-time_range` argument is optional; it is the number of seconds for which a local mean pressure value is calculated, a factor in the identification of the spike threshold (default=5)
         - Pressure spike timestamps are separated by pressure type and time_range (this information is held in the filenames) and saved as JSON files to the `pressure_spike_times/` folder
 4. Once pressure_spikes have been saved, any of the 3 features may be utilized:
     1. `synchronous_arc_clusters.py`
@@ -43,8 +43,8 @@
 python3 python_files/synchronous_arc_clusters.py --arc_filename data/tidy/all_arc_count_data --sequential True --large True
 ```
 - <ins>Note</ins>:
-    - `-arc_filename` argument is required; path to tidy arc data file
-    - `-sequential` and `-large` are optional arguments; these tell the program what the desired outputs are, with sequential indicating outputs for each system component one by one (several small format heatmaps), and large indicated an output for the entire synchronous arc dataframe with every system component contained in one plot. Default values are False, so to indicate the desired outputs you must provide the argument as True (otherwise it may be left out of the terminal command all together)
+    - `--arc_filename` argument is required; path to tidy arc data file
+    - `--sequential` and `--large` are optional arguments; these tell the program what the desired outputs are, with sequential indicating outputs for each system component one by one (several small format heatmaps), and large indicated an output for the entire synchronous arc dataframe with every system component contained in one plot. Default values are False, so to indicate the desired outputs you must provide the argument as True (otherwise it may be left out of the terminal command all together)
 
 ### <ins>pressure_at_arcs.py</ins>:
 **Inputs:**
@@ -83,7 +83,7 @@ python3 python_files/synchronous_arc_clusters.py --arc_filename data/tidy/all_ar
 python3 python_files/arcs_at_pressure_spikes.py --arc_filename data/tidy/all_arc_count_data --pressure_filename data/tidy/pressure_data --chamber_json pressure_spike_times/chamber_spike_times_5_sec.json --column_json pressure_spike_times/column_spike_times_5_sec.json
 ```
 - <ins>Note</ins>: 
-    - `–arc_filename`, `–pressure_filename`, `–chamber_json`, `–column_json` are all required, must be relative paths to each respective data file
+    - `-–arc_filename`, `–-pressure_filename`, `–-chamber_json`, `–-column_json` are all required, must be relative paths to each respective data file
     - The `window_pressure.py` file is inherited by the `arcs_at_pressure_spikes.py` file, so no commands need to be run for that script specifically
 
 ### <ins>File Descriptions</ins>
