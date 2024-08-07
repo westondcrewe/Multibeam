@@ -13,7 +13,7 @@
         - If filenames include whitespace, put an escape character (\) before the whitespace
 3. The tidy `pressure_data` file is used as input to the `pressure_spike_times.py` file, which identifies and stores the timestamps of all system vacuum pressure spikes.
     - Pressure spikes are defined as observations in the pressure dataset for which the pressure value exceeds 2x the “local pressure mean”. This mean is calculated from the pressure values of the 10 preceding seconds to the spike time
-    - Terminal Terminal command to run: 
+    - Terminal command to run: 
     ```
     python3 python_files/pressure_spike_times.py --pressure_filename data/tidy/pressure_data --time_range 5
     ```
@@ -25,7 +25,7 @@
     1. `synchronous_arc_clusters.py`
     2. `pressure_at_arcs.py`
     3. `arcs_at_pressure_spikes.py` and `window_pressure.py`
-#### <ins>synchronous_arc_clusters.py</ins>
+### <ins>synchronous_arc_clusters.py</ins>
 **Inputs:**
 - Only the clean `all_arc_data` file is passed as an input
 
@@ -35,12 +35,12 @@
     - Arcs are considered synchronous if an arc event occurs at the same time for two different system components 
     - Heatmaps of these synchronous arcs are made for each component, as well as one heatmap displaying the entire synchronous arc dataframe (63 components x 63 components heatmap)
 
-**Terminal Terminal command to run:**
+**Terminal command to run:**
 ```
 ```
 - <ins>Note</ins>:
 
-#### <ins>pressure_at_arcs.py</ins>:
+### <ins>pressure_at_arcs.py</ins>:
 **Inputs:**
 - Scripts take both clean data files from `data/tidy/`
 
@@ -54,12 +54,12 @@
     - Pressure deltas are calculated as the difference between the pressure maximum and pressure mean (as described in 6.b.i)
     - Histograms are created for both chamber and column pressure types, and the corresponding data is saved to `data/pressure_deltas_at_arcs.csv`
 
-**Terminal Terminal command to run:**
+**Terminal command to run:**
 ```
 ```
 - <ins>Note</ins>:
 
-#### <ins>arcs_at_pressure_spikes.py</ins> and <ins>window_pressure.py</ins>:
+### <ins>arcs_at_pressure_spikes.py</ins> and <ins>window_pressure.py</ins>:
 **Inputs:**
 - Both clean dataframes from `data/tidy/` and both json files in `pressure_spike_times/` are used as input'
 
@@ -72,7 +72,7 @@
     - A folder containing barcharts of the counts and percentages of arcs that occurred at the same time as a pressure spike for every system power supply component 
     - The corresponding dataframe is saved to `data/arcs_at_pressure_spikes.csv`
 
-**Terminal Terminal command to run:**
+**Terminal command to run:**
 ```
 python3 python_files/arcs_at_pressure_spikes.py --arc_filename data/tidy/all_arc_count_data --pressure_filename data/tidy/pressure_data --chamber_json pressure_spike_times/chamber_spike_times_5_sec.json --column_json pressure_spike_times/column_spike_times_5_sec.json
 ```
