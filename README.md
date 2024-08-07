@@ -34,7 +34,7 @@
     - A folder containing heatmaps displaying synchronous arc counts and percentages
     - Arcs are considered synchronous if an arc event occurs at the same time for two different system components 
     - Heatmaps of these synchronous arcs are made for each component, as well as one heatmap displaying the entire synchronous arc dataframe for all system components
-- 'data/arc_cluster_large.csv'
+- `data/arc_cluster_large.csv`
     - If the `--large` format is used, then that corresponding dataframe will be saved
     - Too many dataframes are made during the `--sequential` process, and all of that information is held within the large dataframe, so those dataframes are not saved
 
