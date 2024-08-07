@@ -36,9 +36,9 @@
     - Heatmaps of these synchronous arcs are made for each component, as well as one heatmap displaying the entire synchronous arc dataframe (63 components x 63 components heatmap)
 
 **Terminal Terminal command to run:**
-    ```
-    ```
-    - <ins>Note</ins>:
+```
+```
+- <ins>Note</ins>:
 
 #### <ins>pressure_at_arcs.py</ins>:
 **Inputs:**
