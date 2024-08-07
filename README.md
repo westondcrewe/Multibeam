@@ -33,12 +33,15 @@
 - `plots/arc_clusters`
     - A folder containing heatmaps displaying synchronous arc counts and percentages
     - Arcs are considered synchronous if an arc event occurs at the same time for two different system components 
-    - Heatmaps of these synchronous arcs are made for each component, as well as one heatmap displaying the entire synchronous arc dataframe (63 components x 63 components heatmap)
+    - Heatmaps of these synchronous arcs are made for each component, as well as one heatmap displaying the entire synchronous arc dataframe for all system components
 
 **Terminal command to run:**
 ```
+python3 python_files/synchronous_arc_clusters.py --arc_filename data/tidy/all_arc_count_data --sequential True --large True
 ```
 - <ins>Note</ins>:
+    - `-arc_filename` argument is required; path to tidy arc data file
+    - `-sequential` and `-large` are optional arguments; these tell the program what the desired outputs are, with sequential indicating outputs for each system component one by one (several small format heatmaps), and large indicated an output for the entire synchronous arc dataframe with every system component contained in one plot. Default values are False, so to indicate the desired outputs you must provide the argument as True (otherwise it may be left out of the terminal command all together)
 
 ### <ins>pressure_at_arcs.py</ins>:
 **Inputs:**
