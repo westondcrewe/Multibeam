@@ -1,6 +1,6 @@
 ## REPOSITORY FOR MULTIBEAM ARC AND PRESSURE DATA ANALYSIS
 
-### Flowchart and Manual
+### <ins>Flowchart and Manual</ins>
 ![Project Flowchart](WCMultibeamProjectFlowchart.png)
 
 1. Database is accessed via Grafana; `all arc counts` and `pressure` data is downloaded to the repository’s `data/MEBL/` subfolder.
