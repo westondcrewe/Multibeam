@@ -1,5 +1,6 @@
-data/MEBL3/*
+data/MEBL/*
+data/tidy/*
 pressure_at_arcs_2.ipynb
 pressure_at_arcs.ipynb
-data/tidy/*
 plots/*
+progress.txt
