@@ -9,7 +9,7 @@
 sh library_package_installs.sh
 ```
 5. To run individual features within the project repository, follow along with the provided **Flowchart and Manual**
-5. Alternatively, to run the entire project in one go, use the following command to run the ```run_all.sh``` script:
+5. Alternatively, to run the entire project in one go, use the following command to run the ```run_all.sh``` script (must have MEBL data downloaded already, see Flowchart and Manual pt.1):
 ```
 sh run_all.sh
 ```
