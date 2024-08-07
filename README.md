@@ -36,9 +36,9 @@
     - Heatmaps of these synchronous arcs are made for each component, as well as one heatmap displaying the entire synchronous arc dataframe (63 components x 63 components heatmap)
 
 **Terminal Terminal command to run:**
-```
-```
-    <ins>Note</ins>:
+    ```
+    ```
+    - <ins>Note</ins>:
 
 #### <ins>pressure_at_arcs.py</ins>:
 **Inputs:**
@@ -55,9 +55,9 @@
     - Histograms are created for both chamber and column pressure types, and the corresponding data is saved to `data/pressure_deltas_at_arcs.csv`
 
 **Terminal Terminal command to run:**
-```
-```
-    <ins>Note</ins>:
+    ```
+    ```
+    - <ins>Note</ins>:
 
 #### <ins>arcs_at_pressure_spikes.py</ins> and <ins>window_pressure.py</ins>:
 **Inputs:**
@@ -73,8 +73,10 @@
     - The corresponding dataframe is saved to `data/arcs_at_pressure_spikes.csv`
 
 **Terminal Terminal command to run:**
-```python3 python_files/arcs_at_pressure_spikes.py --arc_filename data/tidy/all_arc_count_data --pressure_filename data/tidy/pressure_data --chamber_json pressure_spike_times/chamber_spike_times_5_sec.json --column_json pressure_spike_times/column_spike_times_5_sec.json```
-    <ins>Note</ins>: 
+    ```
+    python3 python_files/arcs_at_pressure_spikes.py --arc_filename data/tidy/all_arc_count_data --pressure_filename data/tidy/pressure_data --chamber_json pressure_spike_times/chamber_spike_times_5_sec.json --column_json pressure_spike_times/column_spike_times_5_sec.json
+    ```
+    - <ins>Note</ins>: 
         - `–arc_filename`, `–pressure_filename`, `–chamber_json`, `–column_json` are all required, must be relative paths to each respective data file.
 The `window_pressure.py` file is inherited by the `arcs_at_pressure_spikes.py` file, so no commands need to be run for that script specifically.
 
