@@ -41,7 +41,7 @@
     1. `synchronous_arc_clusters.py`
     2. `pressure_at_arcs.py`
     3. `arcs_at_pressure_spikes.py` and `window_pressure.py`
-#### synchronous_arc_clusters.py:
+#### <ins>synchronous_arc_clusters.py</ins>
 **Inputs:**
 - Only the clean `all_arc_data` file is passed as an input
 
