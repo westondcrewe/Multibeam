@@ -44,7 +44,7 @@ python3 python_files/synchronous_arc_clusters.py --arc_filename data/tidy/all_ar
 ```
 - <ins>Note</ins>:
     - `--arc_filename` argument is required; path to tidy arc data file
-    - `--sequential` and `--large` are optional arguments; these tell the program what the desired outputs are, with sequential indicating outputs for each system component one by one (several small format heatmaps), and large indicated an output for the entire synchronous arc dataframe with every system component contained in one plot. Default values are False, so to indicate the desired outputs you must provide the argument as True (otherwise it may be left out of the terminal command all together)
+    - `--sequential` and `--large` are optional arguments; these tell the program what the desired outputs are. A `True` sequential argument will produce outputs for each system component one by one (several small format heatmaps), and a `True` large argument produces an output for the entire synchronous arc dataframe with every system component contained in one plot. Default values are `False`, so to indicate the desired outputs you must provide the argument as `True` (otherwise it may be left out of the terminal command all together)
 
 ### <ins>pressure_at_arcs.py</ins>:
 **Inputs:**
@@ -62,8 +62,11 @@ python3 python_files/synchronous_arc_clusters.py --arc_filename data/tidy/all_ar
 
 **Terminal command to run:**
 ```
+python3 python_files/pressure_at_arcs.py --arc_filename data/tidy/all_arc_count_data --pressure_filename data/tidy/pressure_data --pressure_linegraphs True --delta_histograms True
 ```
 - <ins>Note</ins>:
+    - `--arc_filename`, `--pressure_filename` arguments are required; paths to tidy data
+    - `--pressure_linegraphs`, `--delta_histograms` are optional arguments; ; these tell the program what the desired outputs are. A `True` pressure_linegraph argument will produce the linegraphs for the `plots/pressure_at_arcs/` folder, and a `True` delta_histograms argument produces the histograms for `plots/pressure_delta_histograms`. Default values are `False`, so to indicate the desired outputs you must provide the argument as `True` (otherwise it may be left out of the terminal command all together)
 
 ### <ins>arcs_at_pressure_spikes.py</ins> and <ins>window_pressure.py</ins>:
 **Inputs:**
