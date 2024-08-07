@@ -47,7 +47,7 @@ sh run_all.sh
     - A folder containing heatmaps displaying synchronous arc counts and percentages
     - Arcs are considered synchronous if an arc event occurs at the same time for two different system components 
     - Heatmaps of these synchronous arcs are made for each component, as well as one heatmap displaying the entire synchronous arc dataframe for all system components
-- `data/arc_cluster_large.csv`
+- `data/results/arc_cluster_large.csv`
     - If the `--large` format is used, then that corresponding dataframe will be saved
     - Too many dataframes are made during the `--sequential` process, and all of that information is held within the large dataframe, so those dataframes are not saved
 
@@ -71,7 +71,7 @@ python3 python_files/synchronous_arc_clusters.py --arc_filename data/tidy/all_ar
 - `plots/pressure_delta_histograms/`
     - A folder containing histograms displaying the distribution of “pressure delta” values across all arc events
     - Pressure deltas are calculated as the difference between the pressure maximum and pressure mean (as described in 6.b.i)
-    - Histograms are created for both chamber and column pressure types, and the corresponding data is saved to `data/pressure_deltas_at_arcs.csv`
+    - Histograms are created for both chamber and column pressure types, and the corresponding data is saved to `data/results/pressure_deltas_at_arcs.csv`
 
 **Terminal command to run:**
 ```
@@ -92,7 +92,7 @@ python3 python_files/pressure_at_arcs.py --arc_filename data/tidy/all_arc_count_
     - A folder that contains time-series line-graph plots displaying the vacuum pressure values over a 20s range surrounding every spike event
 - `plots/arcs_at_pressure_spikes/`
     - A folder containing barcharts of the counts and percentages of arcs that occurred at the same time as a pressure spike for every system power supply component 
-    - The corresponding dataframe is saved to `data/arcs_at_pressure_spikes.csv`
+    - The corresponding dataframe is saved to `data/results/arcs_at_pressure_spikes.csv`
 
 **Terminal command to run:**
 ```

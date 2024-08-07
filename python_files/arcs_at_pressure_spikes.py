@@ -68,7 +68,10 @@ def create_dataframe(column_HVPS, total_arc_counts, arc_pressure_counts, arc_pre
     "Percent of Arcs Synchronous w/ Pressure Spikes": arc_pressure_percent
     }
     arc_pressure_df = pd.DataFrame(dataframe)
-    arc_pressure_df.to_csv('data/arcs_at_pressure_spikes.csv', index = False)
+    output_dir = 'data/results/'
+    os.makedirs(output_dir, exist_ok=True)
+    print(f"\nSaving all components data to {output_dir}\n")
+    arc_pressure_df.to_csv(f'{output_dir}arcs_at_pressure_spikes.csv', index = False)
     return arc_pressure_df
 def make_plot_directory(output_dir):
     try:

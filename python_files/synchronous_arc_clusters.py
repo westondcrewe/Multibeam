@@ -159,10 +159,11 @@ def large_cluster_main(col_hvps_list):
     arc_cluster_df.insert(0, "Column HVPS", col_hvps_list)
     arc_cluster_df = arc_cluster_df.set_index("Column HVPS")
     arc_cluster_df = arc_cluster_df.fillna(0)
-    data_output = 'data/arc_cluster_large.csv'
-    print(f"\nSaving all components data to {data_output}\n")
+    output_dir = 'data/results/'
+    os.makedirs(output_dir, exist_ok=True)
+    print(f"\nSaving all components data to {output_dir}\n")
     time.sleep(0.5)
-    arc_cluster_df.to_csv(f'{data_output}', index=True)
+    arc_cluster_df.to_csv(f'{output_dir}arc_cluster_large.csv', index=True)
     # CONDENSE (REMOVE 0 ARC COMPONENTS)
     arc_cluster_df_condensed = arc_cluster_df.loc[(arc_cluster_df != 0).any(axis=1)]
     arc_cluster_df_condensed = arc_cluster_df_condensed.loc[:, (arc_cluster_df_condensed != 0).any(axis=0)]

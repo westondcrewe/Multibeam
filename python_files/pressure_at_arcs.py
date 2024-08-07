@@ -180,8 +180,10 @@ if __name__ == '__main__':
         pressure_delta_dict["Chamber Pressure Delta"].extend(chamber_delta_list)
         pressure_delta_dict["Column Pressure Delta"].extend(column_delta_list)
     pressure_delta_df = pd.DataFrame(pressure_delta_dict)
-    data_output = 'data/pressure_deltas_at_arcs.csv'
-    print(f"\nSaving pressure delta data to {data_output}\n")
-    pressure_delta_df.to_csv(f'{data_output}', index=False)
+    output_dir = 'data/results/'
+    os.makedirs(output_dir, exist_ok=True)
+    print(f"\nSaving all components data to {output_dir}\n")
+    print(f"\nSaving pressure delta data to {output_dir}\n")
+    pressure_delta_df.to_csv(f'{output_dir}pressure_deltas_at_arcs.csv', index=False)
     if delta_histograms:
         pressure_delta_dist_plot(pressure_delta_df, 75)
