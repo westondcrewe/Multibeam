@@ -12,6 +12,7 @@ from collections import deque
 import argparse
 import os
 import errno
+import time
 ### HELPER FUNCTIONS ###
 def read_arc_data(arc_filename):
     # READ-IN CLEAN ARC COUNTS DATAFRAME
@@ -158,6 +159,10 @@ def large_cluster_main(col_hvps_list):
     arc_cluster_df.insert(0, "Column HVPS", col_hvps_list)
     arc_cluster_df = arc_cluster_df.set_index("Column HVPS")
     arc_cluster_df = arc_cluster_df.fillna(0)
+    data_output = 'data/arc_cluster_large.csv'
+    print(f"\nSaving all components data to {data_output}\n")
+    time.sleep(0.5)
+    arc_cluster_df.to_csv(f'{data_output}', index=True)
     # CONDENSE (REMOVE 0 ARC COMPONENTS)
     arc_cluster_df_condensed = arc_cluster_df.loc[(arc_cluster_df != 0).any(axis=1)]
     arc_cluster_df_condensed = arc_cluster_df_condensed.loc[:, (arc_cluster_df_condensed != 0).any(axis=0)]
@@ -170,7 +175,6 @@ def large_cluster_main(col_hvps_list):
     os.makedirs(output_dir, exist_ok=True)
     print(f"Saving all components plot to {output_dir}")
     plt.savefig(f"{output_dir}All_Component_Synchronous_Arc_Counts.pdf", format = 'pdf')
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--arc_filename',required=True)
