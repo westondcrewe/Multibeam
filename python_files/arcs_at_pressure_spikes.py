@@ -104,7 +104,7 @@ def plot_percents(arc_pressure_df):
     plot = sns.barplot(data = percents_plot_df, x = 'Percent of Arcs Synchronous w/ Pressure Spikes', y = 'Column HVPS', fill = True, hue = 'Percent of Arcs Synchronous w/ Pressure Spikes', legend=False)
     title = "Arcs Synchronous with Column Pressure Spikes Percent"
     plot.set_title(title)
-    output_dir = "plots/"
+    output_dir = "plots/arcs_at_pressure_spikes/"
     make_plot_directory(output_dir)
     print(f"Saving counts plot to {output_dir}")
     plt.savefig(f"{output_dir}{title.replace(" ", "_")}.pdf", format = 'pdf')
@@ -115,7 +115,7 @@ def plot_total_counts(arc_pressure_df):
     plot = sns.barplot(data = total_counts_plot_df, x = 'Total Arc Counts', y = 'Column HVPS', fill = True, hue = 'Total Arc Counts', legend=False)
     title = "Total Arc Counts"
     plot.set_title(title)
-    output_dir = "plots/arcs_at_pressure_spikes/"
+    output_dir = "plots/"
     make_plot_directory(output_dir)
     print(f"Saving counts plot to {output_dir}")
     plt.savefig(f"{output_dir}{title.replace(" ", "_")}.pdf", format = 'pdf')

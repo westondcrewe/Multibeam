@@ -1,0 +1,64 @@
+Column HVPS,Total Arc Counts,Count of Arcs Synchronous w/ Pressure Spikes,Percent of Arcs Synchronous w/ Pressure Spikes
+B2 Beam Blanker,0.0,0.0,0.0
+B2 Bias,2.0,0.0,0.0
+B2 Extractor,22.0,3.0,13.636363636363637
+B2 Filament,0.0,0.0,0.0
+B2 Gun Lens,15.0,2.0,13.333333333333334
+B2 Main Lens,0.0,0.0,0.0
+B2 Suppressor,15.0,0.0,0.0
+B3 Beam Blanker,0.0,0.0,0.0
+B3 Bias,3.0,1.0,33.333333333333336
+B3 Extractor,7.0,3.0,42.857142857142854
+B3 Filament,0.0,0.0,0.0
+B3 Gun Lens,4.0,1.0,25.0
+B3 Main Lens,1.0,0.0,0.0
+B3 Suppressor,2.0,1.0,50.0
+B4 Beam Blanker,0.0,0.0,0.0
+B4 Bias,24.0,4.0,16.666666666666668
+B4 Extractor,5.0,0.0,0.0
+B4 Filament,0.0,0.0,0.0
+B4 Gun Lens,20.0,5.0,25.0
+B4 Main Lens,0.0,0.0,0.0
+B4 Suppressor,3.0,0.0,0.0
+C2 Beam Blanker,0.0,0.0,0.0
+C2 Bias,5.0,1.0,20.0
+C2 Extractor,7.0,0.0,0.0
+C2 Filament,0.0,0.0,0.0
+C2 Gun Lens,6.0,0.0,0.0
+C2 Main Lens,1.0,0.0,0.0
+C2 Suppressor,1.0,0.0,0.0
+C3 Beam Blanker,1.0,0.0,0.0
+C3 Bias,20.0,1.0,5.0
+C3 Extractor,17.0,0.0,0.0
+C3 Filament,0.0,0.0,0.0
+C3 Gun Lens,30.0,1.0,3.3333333333333335
+C3 Main Lens,1.0,0.0,0.0
+C3 Suppressor,6542.0,3.0,0.04585753592173647
+C4 Beam Blanker,0.0,0.0,0.0
+C4 Bias,4.0,0.0,0.0
+C4 Extractor,23.0,2.0,8.695652173913043
+C4 Filament,0.0,0.0,0.0
+C4 Gun Lens,13.0,1.0,7.6923076923076925
+C4 Main Lens,0.0,0.0,0.0
+C4 Suppressor,13.0,0.0,0.0
+D2 Beam Blanker,0.0,0.0,0.0
+D2 Bias,3.0,1.0,33.333333333333336
+D2 Extractor,6.0,1.0,16.666666666666668
+D2 Filament,0.0,0.0,0.0
+D2 Gun Lens,28.0,2.0,7.142857142857143
+D2 Main Lens,0.0,0.0,0.0
+D2 Suppressor,26.0,1.0,3.8461538461538463
+D3 Beam Blanker,0.0,0.0,0.0
+D3 Bias,1.0,0.0,0.0
+D3 Extractor,14.0,1.0,7.142857142857143
+D3 Filament,0.0,0.0,0.0
+D3 Gun Lens,0.0,0.0,0.0
+D3 Main Lens,0.0,0.0,0.0
+D3 Suppressor,0.0,0.0,0.0
+D4 Beam Blanker,0.0,0.0,0.0
+D4 Bias,6.0,0.0,0.0
+D4 Extractor,3.0,0.0,0.0
+D4 Filament,0.0,0.0,0.0
+D4 Gun Lens,4.0,0.0,0.0
+D4 Main Lens,0.0,0.0,0.0
+D4 Suppressor,2.0,0.0,0.0
