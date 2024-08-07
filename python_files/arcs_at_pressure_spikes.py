@@ -106,7 +106,7 @@ def plot_percents(arc_pressure_df):
     plot.set_title(title)
     output_dir = "plots/arcs_at_pressure_spikes/"
     make_plot_directory(output_dir)
-    print(f"Saving counts plot to {output_dir}")
+    print(f"Saving percents plot to {output_dir}")
     plt.savefig(f"{output_dir}{title.replace(" ", "_")}.pdf", format = 'pdf')
 def plot_total_counts(arc_pressure_df):
     total_counts_plot_df = arc_pressure_df[["Column HVPS", "Total Arc Counts"]].sort_values(by="Total Arc Counts", ascending=False)
@@ -117,7 +117,7 @@ def plot_total_counts(arc_pressure_df):
     plot.set_title(title)
     output_dir = "plots/"
     make_plot_directory(output_dir)
-    print(f"Saving counts plot to {output_dir}")
+    print(f"Saving total counts plot to {output_dir}")
     plt.savefig(f"{output_dir}{title.replace(" ", "_")}.pdf", format = 'pdf')
 
 ### MAIN FUNCTION ###

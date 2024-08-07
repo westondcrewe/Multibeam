@@ -76,6 +76,8 @@ def pressure_window(timestamp, pressure_df, pressure_type = None, window_seconds
     ax1.set_title(title)
     # SAVE IMAGE
     filename = f"{title}_{str(timestamp).replace(":", "_")}.pdf".replace(" ", "_")
-    plt.savefig(f"plots/pressure_spikes/{filename}", format='pdf')
+    output_dir = 'plots/pressure_spikes/'
+    os.makedirs(output_dir, exist_ok=True)
+    plt.savefig(f"{output_dir}{filename}", format='pdf')
     #plt.show()
     return window_df
