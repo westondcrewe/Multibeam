@@ -115,8 +115,10 @@ def pressure_window(col_hvps, arc_times, arc_time_idx, pressure_linegraphs, time
             chamber_delta_list.append(cham_delta)
             column_delta_list.append(col_delta)
     return pressure, arc_times_list, arc_component_list, chamber_delta_list, column_delta_list
-def pressure_delta_dist_plot(pressure_delta_df, n_bins=10):
-    for pres_type in ["Chamber", "Column"]:
+def pressure_delta_dist_plot(chamber_pressure_delta_df, column_pressure_delta_df, n_bins):
+    dfl = [chamber_pressure_delta_df, column_pressure_delta_df]
+    for i, pres_type in enumerate(["Chamber", "Column"]):
+        pressure_delta_df = dfl[i]
         plt.figure(figsize=(13, 6))
         pressure_delta_data = pressure_delta_df[pres_type + " Pressure Delta"]
         min_delta = pressure_delta_data.min()
@@ -144,12 +146,14 @@ if __name__ == '__main__':
     parser.add_argument('--pressure_filename', required=True)
     parser.add_argument('--pressure_linegraphs', required=False, default=False)
     parser.add_argument('--delta_histograms', required=False, default=False)
+    parser.add_argument('--n_bins', required=False, default=75)
     args = parser.parse_args()
 
     arc_filename = args.arc_filename
     pressure_filename = args.pressure_filename
     pressure_linegraphs = args.pressure_linegraphs
     delta_histograms = args.delta_histograms
+    n_bins = args.n_bins
 
     arc_count_df, arc_count_arr = read_arc_data(arc_filename)
     pressure_df, pressure_arr = read_pressure_data(pressure_filename)
@@ -179,11 +183,13 @@ if __name__ == '__main__':
         pressure_delta_dict["Arc Component"].extend(arc_component_list)
         pressure_delta_dict["Chamber Pressure Delta"].extend(chamber_delta_list)
         pressure_delta_dict["Column Pressure Delta"].extend(column_delta_list)
-    pressure_delta_df = pd.DataFrame(pressure_delta_dict)
+    chamber_pressure_delta_df = pd.DataFrame({col: pressure_delta_dict[col] for col in ['Arc Time', 'Arc Component', 'Chamber Pressure Delta']}).sort_values("Chamber Pressure Delta", ascending=False)
+    column_pressure_delta_df = pd.DataFrame({col: pressure_delta_dict[col] for col in ['Arc Time', 'Arc Component', 'Column Pressure Delta']}).sort_values("Column Pressure Delta", ascending=False)
     output_dir = 'data/results/'
     os.makedirs(output_dir, exist_ok=True)
     print(f"\nSaving all components data to {output_dir}\n")
     print(f"\nSaving pressure delta data to {output_dir}\n")
-    pressure_delta_df.to_csv(f'{output_dir}pressure_deltas_at_arcs.csv', index=False)
+    chamber_pressure_delta_df.to_csv(f'{output_dir}chamber_pressure_deltas_at_arcs.csv', index=False)
+    column_pressure_delta_df.to_csv(f'{output_dir}column_pressure_deltas_at_arcs.csv', index=False)
     if delta_histograms:
-        pressure_delta_dist_plot(pressure_delta_df, 75)
+        pressure_delta_dist_plot(chamber_pressure_delta_df, column_pressure_delta_df, n_bins)

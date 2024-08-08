@@ -75,11 +75,11 @@ python3 python_files/synchronous_arc_clusters.py --arc_filename data/tidy/all_ar
 
 **Terminal command to run:**
 ```
-python3 python_files/pressure_at_arcs.py --arc_filename data/tidy/all_arc_count_data --pressure_filename data/tidy/pressure_data --pressure_linegraphs True --delta_histograms True
+python3 python_files/pressure_at_arcs.py --arc_filename data/tidy/all_arc_count_data --pressure_filename data/tidy/pressure_data --pressure_linegraphs True --delta_histograms True --n_bins 80
 ```
 - <ins>Note</ins>:
     - `--arc_filename`, `--pressure_filename` arguments are required; paths to tidy data
-    - `--pressure_linegraphs`, `--delta_histograms` are optional arguments; ; these tell the program what the desired outputs are. A `True` pressure_linegraph argument will produce the linegraphs for the `plots/pressure_at_arcs/` folder, and a `True` delta_histograms argument produces the histograms for `plots/pressure_delta_histograms`. Default values are `False`, so to indicate the desired outputs you must provide the argument as `True` (otherwise it may be left out of the terminal command all together)
+    - `--pressure_linegraphs`, `--delta_histograms`, `--n_bins` are optional arguments; ; these tell the program what the desired outputs are. A `True` pressure_linegraph argument will produce the linegraphs for the `plots/pressure_at_arcs/` folder, and a `True` delta_histograms argument produces the histograms for `plots/pressure_delta_histograms`. Default values for these arguments are `False`, so to indicate the desired outputs you must provide the argument as `True` (otherwise it may be left out of the terminal command all together). The `n_bins` argument is strictly for formatting the delta histograms, giving user ability to select the number of bins for that plot (default = 75).
 
 ### <ins>arcs_at_pressure_spikes.py</ins> and <ins>window_pressure.py</ins>:
 **Inputs:**
