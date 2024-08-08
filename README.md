@@ -87,7 +87,7 @@ python3 python_files/pressure_at_arcs.py --arc_filename data/tidy/all_arc_count_
     - `--arc_filename`, `--pressure_filename` arguments are required; paths to tidy data
     - `--pressure_linegraphs`, `--delta_histograms`, `--n_bins` are optional arguments; ; these tell the program what the desired outputs are. A `True` pressure_linegraph argument will produce the linegraphs for the `plots/pressure_at_arcs/` folder, and a `True` delta_histograms argument produces the histograms for `plots/pressure_delta_histograms`. Default values for these arguments are `False`, so to indicate the desired outputs you must provide the argument as `True` (otherwise it may be left out of the terminal command all together). The `n_bins` argument is strictly for formatting the delta histograms, giving user ability to select the number of bins for that plot (default = 75).
 
-### <ins>arcs_at_pressure_spikes.py</ins> and <ins>window_pressure.py</ins>:
+### <ins>arcs_at_pressure_spikes.py</ins> and <ins>pressure_window_plot.py</ins>:
 **Inputs:**
 - Both clean dataframes from `data/tidy/` and both json files in `pressure_spike_times/` are used as input'
 
@@ -106,4 +106,4 @@ python3 python_files/arcs_at_pressure_spikes.py --arc_filename data/tidy/all_arc
 ```
 - <ins>Note</ins>: 
     - `-–arc_filename`, `–-pressure_filename`, `–-chamber_json`, `–-column_json` are all required, must be relative paths to each respective data file
-    - The `window_pressure.py` file is inherited by the `arcs_at_pressure_spikes.py` file, so no commands need to be run for that script specifically
+    - The `pressure_window_plot.py` file is inherited by the `arcs_at_pressure_spikes.py` file, so no commands need to be run for that script specifically
