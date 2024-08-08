@@ -60,6 +60,7 @@ def pressure_window(timestamp, pressure_df, pressure_type = None, window_seconds
         sns.lineplot(data=window_df, x="Time", y="Chamber Pressure", ax=ax1, label='Chamber Pressure', color='b')
         ax1.set_ylabel('Chamber Pressure')
         ax1.legend(loc='upper left')
+        ax1.ticklabel_format(axis='y', style='sci', scilimits=(0,0))
     # PLOT COLUMN PRESSURE
     if 'Column Pressure' in pressure_type:
         if 'Chamber Pressure' in pressure_type: # if both pressures plotted, put column pressure axis on right side
@@ -67,10 +68,12 @@ def pressure_window(timestamp, pressure_df, pressure_type = None, window_seconds
             sns.lineplot(data=window_df, x="Time", y="Column Pressure", ax=ax2, label='Column Pressure', color='r')
             ax2.set_ylabel('Column Pressure')
             ax2.legend(loc='upper right')
+            ax2.ticklabel_format(axis='y', style='sci', scilimits=(0,0))
         else:
             sns.lineplot(data=window_df, x="Time", y="Column Pressure", ax=ax1, label='Column Pressure', color='r')
             ax1.set_ylabel('Column Pressure')
             ax1.legend(loc='upper right')
+            ax1.ticklabel_format(axis='y', style='sci', scilimits=(0,0))
     # ADDING TITLES AND LEGENDS
     title = ', '.join(pressure_type) + f" Spike at {timestamp}"
     ax1.set_title(title)

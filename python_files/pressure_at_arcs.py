@@ -43,8 +43,10 @@ def get_arc_times(col_hvps, arc_count_df, pressure_df):
     '''
     arc_times = arc_count_df[arc_count_df[col_hvps] > 0]["Time"]
     if len(arc_times) > 0: 
-        arc_idx = np.where(pressure_df["Time"].isin(arc_times))[0]
+        time_list = pressure_df["Time"].tolist()
+        arc_idx = [time_list.index(time) if time in time_list else np.nan for time in arc_times]
     else: arc_idx = []
+    print(arc_idx)
     return arc_times, arc_idx
 def pressure_at_arc_plot(col_hvps, arc, pressure, cham_max, cham_max_idx, cham_max_time, cham_local_mean, cham_delta, col_max, col_max_idx, col_max_time, col_local_mean, col_delta, local_mean_range):
     # INITIALIZE
@@ -89,8 +91,14 @@ def pressure_window(col_hvps, arc_times, arc_time_idx, pressure_linegraphs, time
     chamber_delta_list = []
     column_delta_list = []
     for arc, idx in enumerate(arc_time_idx):
-        #print(i)
-        #print(f"{row_idx=}, {num_rows=}")
+        if np.isnan(idx):
+            continue
+        print(f"{arc_times.iloc[arc]}")
+        print(f"{pressure_arr[idx, 0]}")
+        if str(arc_times.iloc[arc]) != str(pressure_arr[idx, 0]):
+            time.sleep(5)
+            print("ISSUE")
+            time.sleep(5)
         if idx < time_range:
             pressure = pressure_arr[:idx+time_range+1]
         elif idx + time_range > num_rows:
@@ -98,6 +106,7 @@ def pressure_window(col_hvps, arc_times, arc_time_idx, pressure_linegraphs, time
         else:
             pressure = pressure_arr[idx-time_range:idx+time_range+1]
         if pressure.size > 0:
+            print(f"{pressure=}")
             cham_max_idx = np.argmax(pressure[time_range-spike_range:time_range+spike_range+1, 1]) + (time_range-spike_range)
             cham_max = pressure[cham_max_idx, 1]
             cham_max_time = pressure[cham_max_idx, 0]
@@ -171,10 +180,10 @@ if __name__ == '__main__':
         lenght_symbol = (74-len(col_hvps))//2
         print(f"{'+'*lenght_symbol}{col_hvps}{'+'*lenght_symbol}")
         ## strung out: initial dataset had several thousand C3 Suppressor arcs, so script would take way too long
-        #'''
+        '''
         if col_hvps == 'C3 Suppressor':
             continue
-        #'''
+        '''
         # GET ARC TIMES
         arc_times, arc_time_idx = get_arc_times(col_hvps, arc_count_df, pressure_df)                                        # col_idx from enumerate will be offset by 1 from proper index in arc_counts
         # FILTER PRESSURE DATA BASED ON ARC TIMES

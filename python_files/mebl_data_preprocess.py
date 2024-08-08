@@ -35,6 +35,8 @@ def pressure_tidy(filename):
     print(f"{filename} : file read into a pandas dataframe.")
     # CONVERT "Time" VARIABLE FROM STRING TO DATETIME OBJECT
     pressure_df['Time'] = pd.to_datetime(pressure_df['Time'])
+    pressure_df['Chamber Pressure'] = pressure_df['Chamber Pressure'].astype(np.float64)
+    pressure_df['Column Pressure'] = pressure_df['Column Pressure'].astype(np.float64)
     pressure_df.to_csv('data/tidy/pressure_data', index = False)
 ### MAIN FUNCTION ###
 if __name__ == '__main__':
@@ -60,5 +62,12 @@ if __name__ == '__main__':
                 print(f"Failed to change permissions or create directory: {e}")
         else:
             raise
-    arc_tidy(arc_filename)
-    pressure_tidy(pressure_filename)
+    try:    
+        arc_tidy(arc_filename)
+    except:
+        print(f"Could not clean {arc_filename} as all_arc_count_data")
+    try:    
+        pressure_tidy(pressure_filename)
+    except:
+        print(f"Could not clean {pressure_filename} as pressure_data")
+    
