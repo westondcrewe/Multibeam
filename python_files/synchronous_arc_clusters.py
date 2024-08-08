@@ -128,7 +128,7 @@ def sequential_clusters_main(col_hvps_list, arc_count_arr):
             sns.heatmap(pivot_count, annot=True, cmap="YlGnBu", fmt="g", ax = axes[0])
             axes[0].set_title(f'Heatmap of Synchronous {col_hvps} Arc Count')
             # CONSTRUCT PERECENTAGE PLOT
-            sns.heatmap(pivot_percentage, annot=True, cmap="YlGnBu", fmt="g", ax = axes[1])
+            sns.heatmap(pivot_percentage, annot=True, cmap="YlGnBu", fmt=".3g", ax = axes[1])
             axes[1].set_title(f'Heatmap of Synchronous {col_hvps} Arc Percentage')
             # SAVE FIGURE
             title = f"{col_hvps} Same Time Arc Clusters"
@@ -170,7 +170,7 @@ def large_cluster_main(col_hvps_list):
     print(arc_cluster_df_condensed)
     # PLOT
     plt.figure(figsize=(20, 16))
-    sns.heatmap(arc_cluster_df_condensed, annot=True, cmap='viridis')
+    sns.heatmap(arc_cluster_df_condensed, annot=True, fmt='.3g', cmap='viridis')
     plt.title('Heatmap of Synchronous Column Power Supply Component Arc Counts')
     output_dir = "plots/arc_clusters/"
     os.makedirs(output_dir, exist_ok=True)
