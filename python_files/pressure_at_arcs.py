@@ -185,7 +185,7 @@ if __name__ == '__main__':
         pressure_delta_dict["Column Pressure Delta"].extend(column_delta_list)
     chamber_pressure_delta_df = pd.DataFrame({col: pressure_delta_dict[col] for col in ['Arc Time', 'Arc Component', 'Chamber Pressure Delta']}).sort_values("Chamber Pressure Delta", ascending=False)
     column_pressure_delta_df = pd.DataFrame({col: pressure_delta_dict[col] for col in ['Arc Time', 'Arc Component', 'Column Pressure Delta']}).sort_values("Column Pressure Delta", ascending=False)
-    output_dir = 'data/results/'
+    output_dir = 'data/results/deltas/'
     os.makedirs(output_dir, exist_ok=True)
     print(f"\nSaving all components data to {output_dir}\n")
     print(f"\nSaving pressure delta data to {output_dir}\n")

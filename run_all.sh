@@ -1,8 +1,8 @@
 #!/bin/sh
 
-cd ..
-chmod 777 Multibeam-main/
-cd Multibeam-main
+#cd ..
+#chmod 777 Multibeam-main/
+#cd Multibeam-main
 
 rm -rf plots/*
 rm -rf data/tidy

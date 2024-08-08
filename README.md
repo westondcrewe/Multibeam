@@ -71,7 +71,7 @@ python3 python_files/synchronous_arc_clusters.py --arc_filename data/tidy/all_ar
 - `plots/pressure_delta_histograms/`
     - A folder containing histograms displaying the distribution of “pressure delta” values across all arc events
     - Pressure deltas are calculated as the difference between the pressure maximum and pressure mean (as described in 6.b.i)
-    - Histograms are created for both chamber and column pressure types, and the corresponding data is saved to `data/results/pressure_deltas_at_arcs.csv`
+    - Histograms are created for both chamber and column pressure types, and the corresponding data is saved to `data/results/deltas/`
 
 **Terminal command to run:**
 ```
