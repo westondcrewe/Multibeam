@@ -2,6 +2,9 @@
 
 All plots and data results stored in this repository are for MEBL3 data. 
 When the ```run_all.sh``` script runs, all plots and data results are erased, so it is recommended to run this script when using brand new (non-MEBL3)system data.
+Proper Grafana MEBL2 Dashboards to grab data:
+    - MEBL2 Current and Pressure (New Schema)/MEBL2 Pressure
+    - MEBL 2 Arc Counts/MEBL 2 All Arc Counts
 
 ### <ins>Cloning GitHub Remote Repository Onto Local Machine and Running from Terminal</ins>
 1. Make sure you are on the `main` branch of the `Multibeam` GitHub remote repository
