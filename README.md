@@ -49,7 +49,7 @@ sh run_all.sh
 - Only the clean `all_arc_data` file is passed as an input
 
 **Outputs:**
-- `plots/arc_clusters`
+- `plots/arc_clusters/`
     - A folder containing heatmaps displaying synchronous arc counts and percentages
     - Arcs are considered synchronous if an arc event occurs at the same time for two different system components 
     - Heatmaps of these synchronous arcs are made for each component, as well as one heatmap displaying the entire synchronous arc dataframe for all system components
