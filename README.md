@@ -1,5 +1,8 @@
 ## REPOSITORY FOR MULTIBEAM ARC AND PRESSURE DATA ANALYSIS
 
+All plots and data results stored in this repository are for MEBL3 data. 
+When the ```run_all.sh``` script runs, all plots and data results are erased, so it is recommended to run this script when using brand new (non-MEBL3)system data.
+
 ### <ins>Cloning GitHub Remote Repository Onto Local Machine and Running from Terminal</ins>
 1. Make sure you are on the `main` branch of the `Multibeam` GitHub remote repository
 2. Click the green dropdown menu labelled "< > Code"; select "Download ZIP" and unzip the downloaded file
