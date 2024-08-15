@@ -26,6 +26,7 @@ def read_arc_data(arc_filename):
     arc_count_arr = arc_count_df.to_numpy()
     return arc_count_df, arc_count_arr
 def read_pressure_data(pressure_filename):
+    # READ-IN CLEAN PRESSURE DATAFRAME
     pressure_df = pd.read_csv(pressure_filename, parse_dates=['Time']).fillna(0)    
     print(f"{pressure_filename} : file read into a pandas dataframe.")
     pressure_df["Chamber Pressure"] = pressure_df["Chamber Pressure"].astype(np.float64)
@@ -34,13 +35,16 @@ def read_pressure_data(pressure_filename):
     pressure_arr = pressure_df.to_numpy()
     return pressure_df, pressure_arr
 def get_arc_times(col_hvps, arc_count_df, pressure_df):
-    # GRAB TIMES OF ALL ARC COUNTS (FOR EACH COMPONENT)
     '''Given a column HVSP, find Time values of all arc events
         Argument
-        col_idx:   type=int            index of the column HVSP of measure within arc_counts
+        col_hvps:   type=str            name of column HVSP of importance within arc_counts (main function loops through all col_hvps values)
+        arc_count_df:  type=pd.DataFrame  arc count dataframe
+        pressure_count_df:  type=pd.DataFrame  pressure dataframe
         Return
-        arc_times_df: type=np.array    numpy array arc_counts filtered to keep just arc events of column HVSP of measure
+        arc_times: type=pd.DataFrame    arc_counts filtered to keep just arc events of column HVSP of measure
+        arc_idx:  type=list  list of indexes for every observation in arc_times pertaining to location within the pressure dataframe
     '''
+    # GRAB TIMES OF ALL ARC COUNTS (FOR EACH COMPONENT)
     arc_times = arc_count_df[arc_count_df[col_hvps] > 0]["Time"]
     if len(arc_times) > 0: 
         time_list = pressure_df["Time"].tolist()
@@ -49,6 +53,18 @@ def get_arc_times(col_hvps, arc_count_df, pressure_df):
     print(arc_idx)
     return arc_times, arc_idx
 def pressure_at_arc_plot(col_hvps, arc, pressure, cham_max, cham_max_idx, cham_max_time, cham_local_mean, cham_delta, col_max, col_max_idx, col_max_time, col_local_mean, col_delta, local_mean_range):
+    '''Plot time-series pressure data for a window of time surrounding every arc event (one plot for every arc)
+        Arguments:
+        col_hvps:                           name of power supply component and which system column it belongs to 
+        arc:                                timestamp of arc event currently being plotted around
+        pressure:                           pressure dataframe
+        cham_max, col_max:                  maximum pressures within spike range
+        cham_max_idx, col_max_idx:          idx of cham_max observation within pressure dataframe
+        cham_max_time, col_max_time:        time of cham_max observation within pressure dataframe
+        cham_local_mean, col_local_mean:    mean chamber pressure value for range leading up to cham_max_time
+        cham_delta, col_delta:              difference between cham_max and cham_local_mean
+        local_mean_range:                   range of time before pressure max from which the local mean is calculated
+    '''
     # INITIALIZE
     plt.figure(figsize=(12, 6))
     ax1 = plt.gca()
@@ -84,6 +100,22 @@ def pressure_at_arc_plot(col_hvps, arc, pressure, cham_max, cham_max_idx, cham_m
     plt.savefig(f"{newpath}/{((str(arc).replace(" ", "__")).replace(":", "_")).replace("-", "_")}.pdf", format='pdf')
 def pressure_window(col_hvps, arc_times, arc_time_idx, pressure_linegraphs, time_range=15, spike_range=5, local_mean_range=10):
     # FILTER PRESSURE DATA
+    '''Filter pressure dataframe down to window of time surrounding arc event
+        Arguments
+        col_hvps:               name of power supply component and which system column it belongs to 
+        arc_times:              list of timestamps of all arc events that occurred on col_hvps
+        arc_time_idx:           indexes of arc_times within pressure dataframe
+        pressure_linegraphs:    boolean value, if True plot filtered dataframe, else do not plot filtered dataframe
+        time_range:             range of time surrounding arc time which the resulting dataframe will span
+        spike_range:            range of time immediately surrounding arc time from which to locate the pressure maximum
+        local_mean_range:       range of time before pressure max from which the local mean is calculated
+        Return
+        pressure:               filtered pressure dataframe
+        arc_times_list:         list of arc times that were maintained in filtered dataframe (would be removed if no concurrent pressure data exists)
+        arc_component_list:     list of col_hvps of same length as arc_times_list (returned just to create large format dataframe of all col_hvps in main function)
+        chamber_delta_list:     list of chamber pressure delta values at every arc
+        column_delta_list:      list of column pressure delta values at every arc
+    '''
     pressure = []
     num_rows = pressure_df.shape[0]
     arc_times_list = []
@@ -125,6 +157,7 @@ def pressure_window(col_hvps, arc_times, arc_time_idx, pressure_linegraphs, time
             column_delta_list.append(col_delta)
     return pressure, arc_times_list, arc_component_list, chamber_delta_list, column_delta_list
 def pressure_delta_dist_plot(chamber_pressure_delta_df, column_pressure_delta_df, n_bins):
+    # PLOT DISTRIBUTION OF PRESSURE DELTAS AT ARC EVENTS (1 HISTOGRAM FOR EACH PRESSURE VACUUM TYPE)
     dfl = [chamber_pressure_delta_df, column_pressure_delta_df]
     for i, pres_type in enumerate(["Chamber", "Column"]):
         pressure_delta_df = dfl[i]

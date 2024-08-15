@@ -8,6 +8,8 @@ import os
 import errno
 ### HELPER FUNCTIONS ####
 def arc_tidy(filename):
+    # CLEAN ARC COUNT DATAFRAME
+    # READ-IN ARC COUNT DATA
     arc_count_df = pd.read_csv(filename, parse_dates=['Time']).fillna(0)
     print(f"{filename} : file read into a pandas dataframe.")
     # DROP PRESSURE COLUMNS (STORED SEPARATELY)
@@ -30,6 +32,7 @@ def arc_tidy(filename):
     # WRTIE PREPROCESSED ARC COUNT DATAFRAME TO CSV
     arc_count_df.to_csv('data/tidy/all_arc_count_data', index = False)
 def pressure_tidy(filename):
+    # CLEAN PRESSURE DATAFRAME
     # READ-IN PRESSURE DATA DATAFRAME
     pressure_df = pd.read_csv(filename).fillna(0)
     print(f"{filename} : file read into a pandas dataframe.")

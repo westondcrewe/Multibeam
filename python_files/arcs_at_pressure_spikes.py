@@ -22,10 +22,12 @@ def read_arc_data(arc_filename):
     arc_count_arr = arc_count_df.to_numpy()
     return arc_count_arr, arc_count_df.columns[1:]
 def read_pressure_data(pressure_filename):
+    # READ-IN CLEAN PRESSURE DATAFRAME
     pressure_df = pd.read_csv(pressure_filename, parse_dates=['Time'])    
     print(f"{pressure_filename} : file read into a pandas dataframe.")
     return pressure_df
 def read_pressure_spike_data(chamber_json, column_json):
+    # READ-IN PRESSURE SPIKE TIMESTAMP JSONs
     chamber_json = open(chamber_json)
     chamber_spikes = json.load(chamber_json)
     chamber_spikes = [pd.Timestamp(t) for t in chamber_spikes]
@@ -34,10 +36,12 @@ def read_pressure_spike_data(chamber_json, column_json):
     column_spikes = [pd.Timestamp(t) for t in column_spikes]
     return chamber_spikes, column_spikes
 def get_arcs_at_pressure_spikes(arc_count_arr, chamber_spikes, column_spikes):
+    # FIND OBSERVATIONS IN ARCS DF THAT OCCUR AT SPIKE TIMESTAMPS
     pressure_spike_mask = np.isin(arc_count_arr[:, 0], chamber_spikes + column_spikes)
     arcs_at_pressure_spikes = arc_count_arr[pressure_spike_mask]
     return arcs_at_pressure_spikes
 def get_arcs_at_pressure_spikes_counts(arcs_at_pressure_spikes):
+    # IDENTIFY COUNTS OF ARCS CONCURRENT WITH PRESSURE SPIKES FOR EACH COLUMN HVPS
     arc_pressure_counts = []
     num_cols = len(arcs_at_pressure_spikes[0]) 
     for col_idx in range(1, num_cols):  # don't loop over Time variable
@@ -51,6 +55,7 @@ def get_total_arc_counts(arc_count_arr):
         total_arc_counts.append(np.sum(arc_count_arr[:, col_idx]))
     return total_arc_counts
 def get_arcs_at_pressure_spikes_percents(arc_pressure_counts, total_arc_counts):
+    # IDENTIFY PERCENTS OF ARCS CONCURRENT WITH PRESSURE SPIKES FOR EACH COLUMN HVPS (% OF ALL ARCS THAT ARE CONCURRENT WITH PRESSURE SPIKES)
     arc_pressure_percent = []
     num_cols = len(arc_pressure_counts)
     for i in range(num_cols):
@@ -61,6 +66,7 @@ def get_arcs_at_pressure_spikes_percents(arc_pressure_counts, total_arc_counts):
         arc_pressure_percent.append(100*arc_pressure_counts[i]/total)
     return arc_pressure_percent
 def create_dataframe(column_HVPS, total_arc_counts, arc_pressure_counts, arc_pressure_percent):
+    # CREATE DATAFRAMES THAT STORE CONCURRENT ARC-SPIKE COUNTS AND PERCENTS FOR EVERY HVPS COMPONENT
     dataframe = {
     "Column HVPS": column_HVPS,
     "Total Arc Counts": total_arc_counts,
@@ -74,6 +80,7 @@ def create_dataframe(column_HVPS, total_arc_counts, arc_pressure_counts, arc_pre
     arc_pressure_df.to_csv(f'{output_dir}arcs_at_pressure_spikes.csv', index = False)
     return arc_pressure_df
 def make_plot_directory(output_dir):
+    # FUNCTION FOR DIRECTORY MANAGEMENT
     try:
         os.makedirs(output_dir, exist_ok=True)
     except OSError as e:
@@ -90,6 +97,7 @@ def make_plot_directory(output_dir):
         else:
             raise
 def plot_counts(arc_pressure_df):
+    # PLOT COUNTS OF ARCS CONCURRENT WITH PRESSURE SPIKES FOR EVERY HVPS COMPONENT, BY PRESSURE TYPE
     counts_plot_df = arc_pressure_df[["Column HVPS", "Count of Arcs Synchronous w/ Pressure Spikes"]].sort_values(by="Count of Arcs Synchronous w/ Pressure Spikes", ascending=False)
     counts_plot_df = counts_plot_df[counts_plot_df["Count of Arcs Synchronous w/ Pressure Spikes"] > 0]
     plt.figure(figsize=(12,8))
@@ -101,6 +109,7 @@ def plot_counts(arc_pressure_df):
     print(f"Saving counts plot to {output_dir}")
     plt.savefig(f"{output_dir}{title.replace(" ", "_")}.pdf", format = 'pdf')
 def plot_percents(arc_pressure_df):
+    # PLOT PERCENTS OF ARCS CONCURRENT WITH PRESSURE SPIKES FOR EVERY HVPS COMPONENT, BY PRESSURE TYPE
     percents_plot_df = arc_pressure_df[["Column HVPS", "Percent of Arcs Synchronous w/ Pressure Spikes"]].sort_values(by="Percent of Arcs Synchronous w/ Pressure Spikes", ascending=False)
     percents_plot_df = percents_plot_df[percents_plot_df["Percent of Arcs Synchronous w/ Pressure Spikes"] > 0] 
     plt.figure(figsize=(12,8))
@@ -112,6 +121,7 @@ def plot_percents(arc_pressure_df):
     print(f"Saving percents plot to {output_dir}")
     plt.savefig(f"{output_dir}{title.replace(" ", "_")}.pdf", format = 'pdf')
 def plot_total_counts(arc_pressure_df):
+    # PLOT TOTAL ARC COUNTS FOR EVERY HVPS COMPONENT
     total_counts_plot_df = arc_pressure_df[["Column HVPS", "Total Arc Counts"]].sort_values(by="Total Arc Counts", ascending=False)
     total_counts_plot_df = total_counts_plot_df[total_counts_plot_df["Total Arc Counts"] > 0]   
     plt.figure(figsize=(12,8))
