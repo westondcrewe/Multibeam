@@ -13,9 +13,12 @@ import errno
 def time_window_filter(timestamp, pressure_df, window_df, window_seconds):
     """Filter a given dataframe to keep observations within window_seconds seconds of the observation at timestamp Time value.
         Arguments:
-        timestamp -- Time value of type datetime, likely used for times of arc events
-        window_df -- Tidy dataframe holding pressure information, pressure_df in original form
-        window_seconds -- Integer denoting range of time for observations kept in returned dataframe filtered_df
+        timestamp       --      Time value of type datetime, likely used for times of arc events
+        pressure_df     --      main pressure dataframe
+        window_df       --      Tidy dataframe holding pressure information, pressure_df in original form
+        window_seconds  --      Integer denoting range of time for observations kept in returned dataframe filtered_df
+        Returns:
+        filtered_df     --      Filtered dataframe
     """
     timestamp = pd.to_datetime(timestamp)
     pressure_df['Time_diff'] = (window_df['Time'] - timestamp).abs()
@@ -25,8 +28,10 @@ def time_window_filter(timestamp, pressure_df, window_df, window_seconds):
 def pressure_type_filter(pressure_type, window_df):
     """Takes a pressure dataframe as input and filters the columns such that only the given pressure_type is kept in the dataframe
         Arguments:
-        pressure_type -- either Chamber Pressure or Column pressure
-        window_df -- Tidy dataframe holding pressure information, pressure_df in original form
+        pressure_type   --      either Chamber Pressure or Column pressure
+        window_df       --      Tidy dataframe holding pressure information, pressure_df in original form
+        Returns:
+        window_df       --      filtered dataframe
     """
     try:
         keep_vars = ["Time", pressure_type]
@@ -38,9 +43,12 @@ def pressure_type_filter(pressure_type, window_df):
 def pressure_window(timestamp, pressure_df, pressure_type = None, window_seconds = 5):
     """Filters pressure_df to capture and plot a 10 second time frame surrounding an arc event
         Arguments: 
-        timestamp -- keeps rows in which Time is within 10 seconds of arc event (timestamp input) (row axis filter)
-        pressure_type -- either Chamber Pressure or Column Pressure, default = None (means to keep both)
-        window_seconds -- Integer denoting range of time for observations, default = 5
+        timestamp       --      keeps rows in which Time is within 10 seconds of arc event (timestamp input) (row axis filter)
+        pressure_df     --      main pressure dataframe
+        pressure_type   --      either Chamber Pressure or Column Pressure, default = None (means to keep both)
+        window_seconds  --      Integer denoting range of time for observations, default = 5
+        Return:
+        window_df       --      filtered dataframe
     """
     window_df = pressure_df
     # ROW AXIS FILTER

@@ -31,15 +31,18 @@ def get_arc_times(col_idx, arc_count_arr):
     arc_times = arc_count_arr[arc_count_arr[:, col_idx] > 0]
     return arc_times
 def synchronous_arcs(col_hvsp, col_idx, col_hvsp_list, col_hvsp_arcs):
-    '''function to find the number of arcs a column HVPS component has at the same time as the given col_hvsp
+    '''function to find the number of arcs a column HVPS component has at the same time as the given col_hvsp (63 small dataframes)
         Arguments
-        col_hvsp:  type=string  the given column HVSP component for which we are measuring other column HVSP arcs against
-        col_hvsp_list:  type=list of strings  the other columns in the system for which we are measuring arc counts
+        col_hvsp:               the given column HVSP component for which we are measuring other column HVSP arcs against
+        col_idx:                index within columns for col_hvps
+        col_hvsp_list:          the other columns in the system for which we are measuring arc counts
+        col_hvsp_arcs:          dataframe of col_hvps arc observations from all arc count dataframe
         Return
-        arcs_same_time_list:  type=list  list of integers holding the arc counts for every other column HVSP that occur at the same time as arcs for col_hvsp input
+        counts_list:            arc counts for every other column HVSP that occur at the same time as arcs for col_hvsp input
+        percentages_list:       arc percentages for every other column HVSP that occur at the same time as arcs for col_hvsp input (what percent of col_hvps arc happen with other_col arcs)
     '''
     counts_list = []
-    percentages_list = []                                                           # of all of col_hvsp's arc, what percent coincide with other_col_hvsp arcs
+    percentages_list = []             # of all of col_hvsp's arc, what percent coincide with other_col_hvsp arcs
     arc_count = len(col_hvsp_arcs)
     if arc_count == 0:
         list_size = len(col_hvps_list) - 1
@@ -61,12 +64,15 @@ def synchronous_arcs(col_hvsp, col_idx, col_hvsp_list, col_hvsp_arcs):
         percentages_list.append(100*count/arc_count)
     return counts_list, percentages_list
 def synchronous_arcs_large_df(col_hvsp, col_idx, col_hvsp_list, col_hvsp_arcs):
-    '''function to find the number of arcs a column HVPS component has at the same time as the given col_hvsp
+    '''function to find the number of arcs a column HVPS component has at the same time as the given col_hvsp (1 large dataframe 63x63 format)
         Arguments
-        col_hvsp:  type=string  the given column HVSP component for which we are measuring other column HVSP arcs against
-        col_hvsp_list:  type=list of strings  the other columns in the system for which we are measuring arc counts
+        col_hvsp:               the given column HVSP component for which we are measuring other column HVSP arcs against
+        col_idx:                index within columns for col_hvps
+        col_hvsp_list:          the other columns in the system for which we are measuring arc counts
+        col_hvsp_arcs:          dataframe of col_hvps arc observations from all arc count dataframe
         Return
-        arcs_same_time_list:  type=list  list of integers holding the arc counts for every other column HVSP that occur at the same time as arcs for col_hvsp input
+        counts_list:            arc counts for every other column HVSP that occur at the same time as arcs for col_hvsp input
+        percentages_list:       arc percentages for every other column HVSP that occur at the same time as arcs for col_hvsp input (what percent of col_hvps arc happen with other_col arcs)
     '''
     counts_list = []
     percentages_list = []                                                           # of all of col_hvsp's arc, what percent coincide with other_col_hvsp arcs
@@ -90,8 +96,7 @@ def synchronous_arcs_large_df(col_hvsp, col_idx, col_hvsp_list, col_hvsp_arcs):
             print(" "*3, co_arcs[:, [0, col_idx, other_idx]])
             print(f"    {count=}\n")
         counts_list.append(count)
-        percentages_list.append(100*count/col_hvsp_arc_count)
-    
+        percentages_list.append(100*count/col_hvsp_arc_count)  
     return counts_list, percentages_list
 ### MAIN FUNCTIONS ###
 def sequential_clusters_main(col_hvps_list, arc_count_arr):
